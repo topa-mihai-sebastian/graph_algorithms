@@ -1,0 +1,27 @@
+/Users/sebitopa/Projects/AN2/sem2/PA/check_public20250520/_utils/coding_style/check_cpp.py:57: DeprecationWarning: module 'sre_compile' is deprecated
+  import sre_compile
+./p1.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:14:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:14:  Missing space before {  [whitespace/braces] [5]
+./p1.cpp:19:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:19:  Missing space before {  [whitespace/braces] [5]
+./p1.cpp:26:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:26:  Missing space before {  [whitespace/braces] [5]
+./p1.cpp:29:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:29:  Missing space before {  [whitespace/braces] [5]
+./p1.cpp:37:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:37:  Missing space before {  [whitespace/braces] [5]
+./p1.cpp:41:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:41:  Missing space before {  [whitespace/braces] [5]
+./p1.cpp:46:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:46:  Missing space before {  [whitespace/braces] [5]
+./p1.cpp:52:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:52:  Missing space before {  [whitespace/braces] [5]
+./p1.cpp:61:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p1.cpp:61:  Missing space before {  [whitespace/braces] [5]
+./p1.cpp:67:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+./p2.cpp:7:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+./p2.cpp:20:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+Done processing ./p1.cpp
+Done processing ./p2.cpp
+Total errors found: 22

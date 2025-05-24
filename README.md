@@ -19,3 +19,11 @@ incepem de la i =1
 								v[3]
 								3	
 
+In al doilea loop verific daca startul curent este gol => skip
+Daca startul parinte este gol => fail
+
+Calculez nummarul de parinti
+
+pentru toate nodurile de pe stratul curent salvez nodul curent si parintele lui
+
+pe masura ce d creste, [d % parents] va da valori de la 0 la parents-1, apoi se intoarce la 0, 1, ...

@@ -1,0 +1,111 @@
+## Problema 1
+Complexitate = O(max_dist * max_parents)
+
+In primul loop am incercat sa fac cat mai multe lucruir pentru eficienta:
+- am citit valoarea v[i], verific daca v[1] != 0(se poate face asta pentru ca este
+garantat ca v[1] va fi citit la aceasta operatie), verific daca mai exista un element egal cu 0, iar apoi calculez maximul, care reprezinta adancimea arborelui.
+
+Declar 2 structuri de date:
+- vector<vector> layer (int)
+- vector<pair> edges (int, int)
+
+prima va retine datele duap inaltimea lor din arbore dupa formula:
+ - layer[v[i]].push_back(i);
+ de exemplu pentru valoare din cerinta:
+ v = 0 1 1 2
+incepem de la i =1
+ v| 0 1 1 2			i 	  |0   1        2     3 4
+ i| 1 2 3 4			layers|1   v[2]		v[4]
+								2		4
+								v[3]
+								3	
+
+In al doilea loop verific daca startul curent este gol => skip
+Daca startul parinte este gol => fail
+
+Calculez nummarul de parinti
+
+pentru toate nodurile de pe stratul curent salvez nodul curent si parintele lui
+
+pe masura ce d creste, [d % parents] va da valori de la 0 la parents-1, apoi se intoarce la 0, 1, ...
+
+## Problema 2
+
+Citesc valorile in a si apoi construiesc S ca o pereche intre valoare si indexul initial.
+Apoi sortez S dupa valoare, astfel pastrand indexul.
+
+Cum folosesc indexarea:
+
+Sa zicem ca am matricea 3x3 : 1 2 3 cu vectorul asociat 1 2 3 4 5 6 7 8 9
+							  4 5 6
+							  7 8 9
+si vreau sa vad pe ce pozitie se afla elementul 4 in matrice stiind ca este pe indexul i=3 din vector(indexare de la 0)
+
+i=3; x=i/3; y=i%3; => 4 este in (1, 0)
+
+sus: i−M
+
+jos: i+M
+
+stânga: i-1 (dacă y>0)
+
+dreapta:i+1 (dacă y+1<M)
+
+allowed[i] va fi 1 daca celula i face parte dintr-o fereasta curenta de valori.
+vis[i] tine ultimul timestamp la care am vizitat celula i
+incrementez ts de fiecare data cand pornesc BFS pe o fereastra curenta
+=> nu mai trebuie sa resetez vis la 0. daca vis[i] == ts inseamna ca celula i a fost deja visitata de BFS ul curent
+
+q este o coada in care head si tail indica inceputul si sfarsitul cozii.
+
+am implementat asa modelul de coada pentru ca nu imi treceau testele cu std::queue
+
+incep bfs:
+	int head = 0, tail = 0, area = 0;
+	q[tail++] = start;
+	vis[start] = ts;
+head porneste de la 0 si creste pe masura ce scoatem elemente din coada
+tail porneste de la 0 si creste cand adaugam vecini
+
+scot un nod  (int u = q[head++];) si cresc head cu 1.
+area++ pentru ca explorez o noua casetuta
+
+determin coordonatele
+
+apoi tratez 4 cazuri pentru cei 4 vecini posibili.
+
+verific daca vecinul v e in fereasta de valori permisa(allowed[v])
+verific ca nu a fost vizitat deja in acest BFS (vis[v]!=ts)
+ - daca ambele sunt adevarate, marchez (vis[v] =ts) si il bag in coada (q[tail++] =v)
+
+cand head == tail coada e goala si am vizitat toate valorile permise .
+la final in 'area' se afla valoare de casetute din aceasta componenta
+
+dupa pun in best_area valoarea maxima dintre best_ares si area
+
+la final fac: 	allowed[S[l].second] = 0;
+
+S[l] este perechea {valoare, idx} care tocmai a iesit din fereastra.
+S[l].second este indexul din matricea originala
+setez allowed [ idx ] = 0 ca sa il scot de fereastra, astfel incat la pasul l+1 allowed sa se refere doar la pozitiile din intervalul [l+1, r]
+
+allowed e ca o masca bool care iti spune dca celula i este in fereastra curenta de valori
+
+Exemplu fereastra glisasnta
+
+sa zicem ca avem n=2, m=3, k=2
+
+m= 5 1 4
+   2 3 6
+
+S = [ (5,0), (1,1), (4,2), (2,3), (3,4), (6,5) ]  
+
+dupa sortare:
+S = [
+  (1,1),   // l=0
+  (2,3),   // l=1
+  (3,4),   // l=2
+  (4,2),   // l=3
+  (5,0),   // l=4
+  (6,5)    // l=5
+]
